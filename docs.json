@@ -15,7 +15,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides", 
+        "tab": "Guides",
         "defaultGroup": "Take a tour",
         "defaultPage": "./guides/introduction.md",
         "groups": [

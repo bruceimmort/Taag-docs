@@ -15,68 +15,27 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
-        "defaultGroup": "Take a tour",
-        "defaultPage": "./guides/introduction.md",
-        "groups": [
-          {
-            "group": "Take a tour",
-            "pages": [
-              "./guides/introduction"
-            ]
-          },
-          {
-            "group": "Project",
-            "pages": [
-              "guides/v1/project/new",
-              "guides/v1/project/analytics",
-              "guides/v1/project/subscribers",
-              "guides/v1/project/settings"
-            ]
-          },
-          {
-            "group": "Pricing plan",
-            "pages": [
-              "guides/v1/plan/new",
-              "guides/v1/plan/check"
-            ]
-          },
-          {
-            "group": "Pricing rule",
-            "pages": [
-              "guides/v1/rule/new",
-              "guides/v1/rule/edit"
-            ]
-          },
-          {
-            "group": "Integration",
-            "pages": [
-              "guides/v1/integration/connect"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "API Docs",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Documentation",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/introduction",
+              "api-reference/authorization"
             ]
           },
           {
             "group": "Pricing",
             "pages": [
-              "api-reference/v1/pricing/get",
-              "api-reference/v1/pricing/verify"
+              "api-reference/v1/pricing/getPrice"
             ]
           },
           {
             "group": "Subscribers",
             "pages": [
-              "api-reference/v1/subscribers/new",
-              "api-reference/v1/subscribers/verify"
+              "api-reference/v1/subscribers/getSubscribers",
+              "api-reference/v1/subscribers/updateEmail",
+              "api-reference/v1/subscribers/unsubscribe"
             ]
           }
         ]

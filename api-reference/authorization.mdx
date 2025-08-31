@@ -1,0 +1,37 @@
+---
+title: 'API keys'
+---
+
+In every api call you make, you have to add an Authorization header to your request. Always include your `Secret key` in all server-side calls and `Public key` in client-side (like browser) calls. 
+
+---
+
+## Authorization
+Here you will find only two types of api keys, which are:
+
+**Public key** looks like this
+```bash
+Authorization: taag_pk_xxxxxxxxx
+```
+
+**Secret key** looks like this
+```bash
+Authorization: taag_sk_xxxxxxxxx
+```
+---
+
+## Modes
+
+It is important to keep in mind which mode you are in, so you can know which api keys to use.
+
+<AccordionGroup>
+  <Accordion title="Test mode">
+    In the begining you will be in test mode, and here you will need to use api keys for testing.
+  </Accordion>
+
+  <Accordion title="Live">
+    And after being approved you can start using the live api keys in production
+  </Accordion>
+</AccordionGroup>
+
+> Reminder: To find all these keys go to the **settings** section of you project and click on **API keys** on the side

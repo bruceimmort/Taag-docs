@@ -1,90 +1,27 @@
 ---
-
-title: 'Introduction'
-description: "Our pricing engine handles and let's you implement dynamic, location-based pricing so you can offer affordable pricing to everyone and everywhere."
+title: "Introduction"
 ---
 
+Welcome to our api documentation. Until now we hope you already have an account and a project.
+
+If you don't have an account yet, visit [taag](https://taag.cc/) to sign up and add your projects, then come back later !!!
+
+![Taag landing page](/imgs/landing-app.png)
+
+---
 ## Base URL
 
-All your requests start with this base URL:
+All your requests will start with this on base URL
 
 ```bash
-https://taag-api.carllabs.cc
+https://api.taag.cc
 ```
 
-## Authorization
-
-To get going, just add an Authorization header to your request. Always include your `Secret key` in all server-side calls and `Public key` in client-side (like browser) calls. 
-
-
-**Public key** looks like this
-```bash
-Authorization: taag_pk_xxxxxxxxx
-```
-
-**Secret key** looks like this
-```bash
-Authorization: taag_sk_xxxxxxxxx
-```
-
-<Warning>
-  Keep your **secret key** safe and don’t share it around!
-</Warning>
-
-## API Endpoints
-
-
-## What's next?
-Now let's create and set up your first project to access even more other features
+Now let's go through some of the things that you should know before using our APIs
 
 <Card
-  title="Create a Project"
-  href="./guides/v1/project/new"
+  title="API keys"
+  href="./api-reference/v1/authorisation"
 >
-  Start by setting up your first project.
-</Card>
-  
----
-
-> Each section here walks you through the steps needed to navigate and understand the feature.
-So why not integrate now:
-
-<CardGroup cols={2}>
-  <Card
-    title="Get Price"
-    icon="tag"
-    href="./v1/pricing/get"
-  >
-    Get the right price for your users based on their region.
-  </Card>
-  <Card
-    title="Verify Price"
-    icon="shield-check"
-    href="./v1/pricing/verify"
-  >
-    Check if a price is correct before checking out.
-  </Card>
-  <Card
-    title="Add Subscriber"
-    icon="user-plus"
-    href="./v1/subscribers/new"
-  >
-    Add a new subscriber in just one step.
-  </Card>
-  <Card
-    title="Verify Subscriber"
-    icon="user-check"
-    href="./v1/subscribers/verify"
-  >
-    Confirm if a subscriber exists or is active.
-  </Card>
-</CardGroup>
-
-Set prices smartly while building products that scale.
-
-<Card
-  title="Pricing Endpoints"
-  href="./v1/pricing"
->
-  Adapt pricing the way top market leaders already do.
+  Know your api keys and when to use them
 </Card>

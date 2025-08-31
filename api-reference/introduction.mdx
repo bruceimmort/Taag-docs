@@ -1,43 +1,27 @@
 ---
-
-title: 'Introduction'
-description: "Our pricing engine handles and let's you implement dynamic, location-based pricing so you can offer affordable pricing to everyone and everywhere."
+title: "Introduction"
 ---
 
+Welcome to our api documentation. Until now we hope you already have an account and a project.
+
+If you don't have an account yet, visit [taag](https://taag.cc/) to sign up and add your projects, then come back later !!!
+
+![Taag landing page](/imgs/landing-app.png)
+
+---
 ## Base URL
 
-All your requests start with this base URL:
+All your requests will start with this on base URL
 
 ```bash
-https://taag-api.carllabs.cc
+https://api.taag.cc
 ```
 
-## Authorization
-
-To get going, just add an Authorization header to your request. Always include your `Secret key` in all server-side calls and `Public key` in client-side (like browser) calls. 
-
-
-**Public key** looks like this
-```bash
-Authorization: taag_pk_xxxxxxxxx
-```
-
-**Secret key** looks like this
-```bash
-Authorization: taag_sk_xxxxxxxxx
-```
-
-<Warning>
-  Keep your **secret key** safe and don’t share it around!
-</Warning>
-
-## API Endpoints
-
-So why not integrate now and set prices smartly while building products that scale.
+Now let's go through some of the things that you should know before using our APIs
 
 <Card
-  title="Pricing Endpoints"
-  href="./v1/pricing"
+  title="API keys"
+  href="./authorization"
 >
-  Adapt pricing the way top market leaders already do.
+  Know your api keys and when to use them
 </Card>

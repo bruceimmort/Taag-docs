@@ -1,0 +1,51 @@
+---
+title: 'Get subscribers'
+---
+
+Now that you are ready to get new subscribers, you might need them
+
+Use this endpoint to get all your users that subscribed to your service.
+
+```method: GET
+https://api.taag.cc/v1/subscribers/getAll
+```
+
+---
+
+## Authorization
+Same thing here, send the **secret key** in the authorization headers which matches the mode you are using (either **TEST** or **LIVE**):
+
+```bash
+Authorization: taag_sk_xxxxxxxxx
+```
+
+> **Remember:** This secret key is required 
+
+---
+
+## Response
+
+In the response to your request you will get the array of all your subscribers as objects each.
+It looks like this:
+
+```bash
+{
+	"mode": "TEST",
+	"subscribers": [
+		{
+			"email": "johndoe@gmail.com",
+			"subscriberId": "f3a5e5afda82acd2569415e869193d9d",
+			"status": "UNSUBSCRIBED",
+			"countryCode": "RW",
+			"createdAt": "2025-08-26T18:45:40.567Z"
+		}
+	],
+	"count": 1
+}
+```
+
+<Note> Better to keep the **subscriberId** because you will need it later.</Note>
+
+As simple as that !!! 
+
+Now let's keep moving to other important endpoints also ...

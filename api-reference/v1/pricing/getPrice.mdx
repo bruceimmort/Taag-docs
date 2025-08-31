@@ -1,0 +1,47 @@
+---
+title: 'Get price'
+---
+
+You will use this api to get all the plans you have. For example: Basic, Premium...
+
+Here is the endpoint you will have to hit:
+
+```method: GET
+https://api.taag.cc/v1/pricing
+```
+
+---
+
+## Authorization
+
+All you need is to include your **public key** as a value of **authorization** in the header and hit the endpoint
+
+```bash
+Authorization: taag_pk_xxxxxxxxx
+```
+
+<ParamField path="Authorization" type="string" required>
+  Use the public key that matches the mode you are in TEST or LIVE
+</ParamField>
+
+---
+
+## Response
+
+As a response to your request, you will receieve a json of all your plans and its properties
+
+```bash
+{
+    "mode": "TEST",
+	"countryCode": "RW",
+	"plans": [
+		{
+			"planName": "Basic",
+			"formatedPrice": "0.12",
+			"currency": "USD",
+			"interval": "MONTHLY",
+			"planId": "5482769083851118"
+		}
+	]
+}
+```

@@ -1,10 +1,9 @@
 ---
 title: 'Update Email'
+openapi: 'POST /subscribers/updateEmail'
 ---
 
-"A customer is always a king" (Pure fact though)
-
-So whenever any of them change their email, use this endpoint to update it into taag too:
+Whenever any of your subscribers change their email, use this endpoint to update it into Taag (we use emails to send invoices, receipts, etc)
 
 ```method: POST
 https://api.taag.cc/v1/subscribers/updateEmail
@@ -12,33 +11,31 @@ https://api.taag.cc/v1/subscribers/updateEmail
 
 ## Authorization
 
-Same here the **secret key** is required (because of a server side api call) and pass it in the "authorization" as its value like this:
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
 
 ```bash
 Authorization: taag_sk_xxxxxxxxx
 ```
 
-> Don't forget the mode you are in, which is important to keep in mind and use the coreesponding key.
-
----
+<ParamField path="Authorization" type="string" required>
+  Use the secret key that matches the mode you are in TEST or LIVE
+</ParamField>
 
 ## Request body
 
 ```bash
 {
 	"subscriberId": "f3a5e5afda82acd2569415e869193d9d",
-	"newEmail": "janedoe@gmail.com"
+	"newEmail": "singlemoms@gmail.com"
 }
 ```
 
 <ResponseField name="subscriberId" type="string" required>
-    Use the subscriberId you received from us on [get subscribers]("/getSubscribers") endpoint
+    Use the subscriberId you received from us on [get subscribers](./getSubscribers) endpoint or the subscriber you received from our webhook on the subscriber creation
 </ResponseField>
 <ResponseField name="newEmail" type="email" required>
     A new email of the subscriber 
 </ResponseField>
-
----
 
 ## Response
 
@@ -49,9 +46,8 @@ When successful you will receive this response:
         "message": "Subscriber email updated successfully",
         "mode": "TEST",
         "subscriber": {
-            "email": "janedoe@gmail.com",
+            "email": "singlemoms@gmail.com",
             "subscriberId": "f3a5e5afda82acd2569415e869193d9d"
         }
     }
 ```
-Hope we still together step by step !!!

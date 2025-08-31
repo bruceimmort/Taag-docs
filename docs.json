@@ -8,8 +8,8 @@
   },
   "colors": {
     "primary": "#5046FF",
-    "light": "#5E55FB",
-    "dark": "#3C35B5"
+    "light": "#FF0000",
+    "dark": "#FF0000"
   },
   "favicon": "./taagWhiteLogo.png",
   "navigation": {
@@ -20,26 +20,38 @@
           {
             "group": "Documentation",
             "pages": [
-              "api-reference/introduction",
-              "api-reference/authorization"
+              "introduction",
+              "authorization",
+              "webhookUrl",
+              "redirectUrl",
+              "checkout",
+              "testCards"
             ]
           },
           {
             "group": "Pricing",
             "pages": [
-              "api-reference/v1/pricing/getPrice"
+              "v1/pricing/getPrice"
             ]
           },
           {
             "group": "Subscribers",
             "pages": [
-              "api-reference/v1/subscribers/getSubscribers",
-              "api-reference/v1/subscribers/updateEmail",
-              "api-reference/v1/subscribers/unsubscribe"
+              "v1/subscribers/getSubscribers",
+              "v1/subscribers/updateEmail",
+              "v1/subscribers/unsubscribe"
             ]
           }
         ]
       }
+    ]
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude"
     ]
   }
 }

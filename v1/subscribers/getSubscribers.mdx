@@ -1,8 +1,9 @@
 ---
 title: 'Get subscribers'
+openapi: 'GET /subscribers/getSubcribers'
 ---
 
-Now that you are ready to get new subscribers, you might need them
+Now that you are ready to get new subscribers, you might need them internally.
 
 Use this endpoint to get all your users that subscribed to your service.
 
@@ -10,18 +11,15 @@ Use this endpoint to get all your users that subscribed to your service.
 https://api.taag.cc/v1/subscribers/getAll
 ```
 
----
-
 ## Authorization
-Same thing here, send the **secret key** in the authorization headers which matches the mode you are using (either **TEST** or **LIVE**):
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
 
 ```bash
 Authorization: taag_sk_xxxxxxxxx
 ```
-
-> **Remember:** This secret key is required 
-
----
+<ParamField path="Authorization" type="string" required>
+  Use the secret key that matches the mode you are in TEST or LIVE
+</ParamField>
 
 ## Response
 
@@ -33,10 +31,12 @@ It looks like this:
 	"mode": "TEST",
 	"subscribers": [
 		{
-			"email": "johndoe@gmail.com",
+			"email": "stevejobs@apple.com",
+			"firstName": "Steve",
+			"lastName": "Jobs",
 			"subscriberId": "f3a5e5afda82acd2569415e869193d9d",
 			"status": "UNSUBSCRIBED",
-			"countryCode": "RW",
+			"countryCode": "US",
 			"createdAt": "2025-08-26T18:45:40.567Z"
 		}
 	],
@@ -45,7 +45,3 @@ It looks like this:
 ```
 
 <Note> Better to keep the **subscriberId** because you will need it later.</Note>
-
-As simple as that !!! 
-
-Now let's keep moving to other important endpoints also ...

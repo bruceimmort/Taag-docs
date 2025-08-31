@@ -1,0 +1,53 @@
+---
+title: "Unsubcribe"
+openapi: 'POST /subscribers/unsubscribe'
+---
+
+Is it time to unsubscribe a user from using your service? 
+Hit this endpoint right here:
+
+```method: POST
+https://api.taag.cc/v1/subscribers/unsubscribe
+```
+---
+
+## Authorization
+
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
+
+```bash
+Authorization: taag_sk_xxxxxxxxx
+```
+
+<ParamField path="Authorization" type="string" required>
+  Use the secret key that matches the mode you are in TEST or LIVE
+</ParamField>
+
+## Request body
+
+```bash
+{
+	"subscriberId": "f3a5e5afda82acd2569415e869193d9d"
+}
+```
+
+<ResponseField name="subscriberId" type="string" required>
+    Use the **subscriberId** you received to let Taag know which precise user is unsubscribing
+</ResponseField>
+
+## Response
+
+After the user is unsubcribed you will immediately get this response:
+
+```bash
+    {
+        "message": "Subscriber unsubscribed successfully",
+        "mode": "TEST",
+        "subscriber": {
+            "email": "zuck@twitter.com",
+            "subscriberId": "f3a5e5afda82acd2569415e869193d9d",
+            "status": "UNSUBSCRIBED",
+            "unsubscribedAt": "2025-08-26T19:48:57.918Z"
+        }
+    }
+```

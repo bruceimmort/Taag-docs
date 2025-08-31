@@ -1,0 +1,35 @@
+---
+title: 'Redirect'
+---
+
+Whenever there is an event after payment initialization, Taag needs an endpoint to redirect the user on the frontend:
+
+![Webhook URL](/imgs/redirectUrl.png)
+
+> If there is no redirect URL they will be redirected to:`https://billing.taag.cc/callback`
+
+---
+
+## Statuses
+
+This endpoint you provided will receive also statuses in the parameters which are the ones you have to care about.
+
+Here are some examples of the possible statuses:
+
+<AccordionGroup>
+  <Accordion title="Success">
+    When the payment is successfully paid, this is what will be sent to the url you set:
+    
+    ```bash
+    https://redirect-url?status=successful
+    ```
+  </Accordion>
+
+  <Accordion title="Cancelled">
+    When the payment is cancelled, this will be passed in the url:
+
+    ```bash
+    https://redirect-url?status=cancelled
+    ```
+  </Accordion>
+</AccordionGroup>

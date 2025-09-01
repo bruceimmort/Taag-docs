@@ -1,7 +1,12 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "maple",
   "name": "Taag",
+  "logo": {
+    "light": "/logo/Logo.svg",
+    "dark": "/logo/Logo.svg",
+    "href": "https://taag.cc"
+  },
   "appearance": {
     "default": "light",
     "strict": true
@@ -22,10 +27,10 @@
             "pages": [
               "introduction",
               "authorization",
-              "webhookUrl",
-              "redirectUrl",
               "checkout",
-              "testCards"
+              "testCards",
+              "redirectUrl",
+              "webhookUrl"
             ]
           },
           {

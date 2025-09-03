@@ -1,10 +1,10 @@
 ---
-title: 'Redirect'
+title: 'Redirect URL'
 ---
 
 Whenever there is an event after payment initialization, Taag needs an endpoint to redirect the user on the frontend:
 
-![Webhook URL](/imgs/redirectUrl.png)
+![Redirect URL](/imgs/redirectUrl.png)
 
 <Note> If there is no redirect URL they will be redirected to:`https://billing.taag.cc/callback` </Note>
 
@@ -12,7 +12,7 @@ Whenever there is an event after payment initialization, Taag needs an endpoint 
 
 ## Statuses
 
-This endpoint you provided will receive also statuses in the parameters which are the ones you have to care about.
+This redirect URL you provided will receive status parameters, these are the ones you should pay attention to.
 
 Here are some examples of the possible statuses:
 
@@ -21,7 +21,7 @@ Here are some examples of the possible statuses:
     When the payment is successfully paid, this is what will be sent to the url you set:
     
     ```bash
-    https://redirect-url?status=successful
+    https://example.com/callback?status=successful
     ```
   </Accordion>
 
@@ -29,7 +29,7 @@ Here are some examples of the possible statuses:
     When the payment is cancelled, this will be passed in the url:
 
     ```bash
-    https://redirect-url?status=cancelled
+    https://example.com/callback?status=cancelled
     ```
   </Accordion>
 </AccordionGroup>

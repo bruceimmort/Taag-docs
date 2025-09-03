@@ -3,8 +3,6 @@ title: 'Get subscribers'
 openapi: 'GET /subscribers/getSubcribers'
 ---
 
-Now that you are ready to get new subscribers, you might need them internally.
-
 Use this endpoint to get all your users that subscribed to your service.
 
 ```method: GET
@@ -15,7 +13,7 @@ https://api.taag.cc/v1/subscribers/getAll
 All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
 
 ```bash
-Authorization: taag_sk_xxxxxxxxx
+Authorization: taag_sk_mode_xxxxxxxxx
 ```
 <ParamField path="Authorization" type="string" required>
   Use the secret key that matches the mode you are in TEST or LIVE
@@ -23,8 +21,7 @@ Authorization: taag_sk_xxxxxxxxx
 
 ## Response
 
-In the response to your request you will get the array of all your subscribers as objects each.
-It looks like this:
+In the response to your request you will get an object containing an array of all your subscribers each as an object.
 
 ```bash
 {
@@ -44,4 +41,4 @@ It looks like this:
 }
 ```
 
-<Note> Better to keep the **subscriberId** because you will need it later.</Note>
+<Note> Keep the **subscriberId** because you might need it to [update email](../subscribers/updateEmail) or [unsubscribe](../subscribers/unsubscribe).</Note>

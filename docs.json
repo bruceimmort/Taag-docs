@@ -30,7 +30,7 @@
               "checkout",
               "testCards",
               "redirectUrl",
-              "webhookUrl"
+              "webhook"
             ]
           },
           {
@@ -55,7 +55,6 @@
     "options": [
       "copy",
       "view",
-      "chatgpt",
       "claude"
     ]
   }

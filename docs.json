@@ -23,7 +23,7 @@
         "tab": "API Docs",
         "groups": [
           {
-            "group": "Documentation",
+            "group": "Get started",
             "pages": [
               "introduction",
               "authorization",

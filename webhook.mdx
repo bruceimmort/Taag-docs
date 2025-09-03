@@ -1,5 +1,6 @@
 ---
 title: 'Webhook'
+icon: "webhook"
 ---
 
 Since webhooks are the ultimate source of truth, it's crucial to set up a webhook endpoint, go to your project settings, click on 'Webhook & Redirect'. You'll find the Webhook URL and Secret Hash fields needed for Taag to communicate with your application.
@@ -26,12 +27,13 @@ The payload section shows the data that Taag sends to your webhook URL
 {
   "event": "subscriber.new",
   "data": {
-    "email": "stevejobs@apple.com",
-    "firstName": "steve",
-    "lastName": "jobs",
-    "countryCode": "US",
-    "subscriberId": "d4666edb3afb9b54e03c4d8e61a6400a",
-    "createdAt": "2025-08-30T23:12:41.230Z"
+      "email": "stevejobs@apple.com",
+      "firstName": "Steve",
+      "lastName": "Jobs",
+      "subscriberId": "f3a5e5afda82acd2569415e869193d9d",
+      "status": "ACTIVE",
+      "countryCode": "US",
+      "createdAt": "2025-08-26T18:45:40.567Z"
   }
 }
 ```

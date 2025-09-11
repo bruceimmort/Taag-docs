@@ -1,5 +1,5 @@
 ---
-title: 'Webhook'
+title: 'Webhooks'
 icon: "webhook"
 ---
 
@@ -19,24 +19,46 @@ The request sent to the webhook URL will have the following header
 
 **key:** `taag-signature`, **value:** `t=<timestamp>, s=<signature>`
 
-## Request Payload
+## Events
 
-The payload section shows the data that Taag sends to your webhook URL
+The webhook payload depends on which event that occured, here are all events listed:
 
-```json
-{
-  "event": "subscriber.new",
-  "data": {
-      "email": "stevejobs@apple.com",
-      "firstName": "Steve",
-      "lastName": "Jobs",
-      "subscriberId": "f3a5e5afda82acd2569415e869193d9d",
-      "status": "ACTIVE",
-      "countryCode": "US",
-      "createdAt": "2025-08-26T18:45:40.567Z"
+<AccordionGroup>
+  <Accordion title="Subscribed">
+  Whenever there is a new subscriber this payload will be sent to the webhook:
+  ```json
+  {
+    "event": "subscriber.new",
+    "data": {
+        "email": "stevejobs@apple.com",
+        "firstName": "Steve",
+        "lastName": "Jobs",
+        "subscriberId": "f3a5e5afda82acd2569415e869193d9d",
+        "status": "ACTIVE",
+        "countryCode": "US",
+        "createdAt": "2025-08-26T18:45:40.567Z"
+    }
   }
-}
-```
+  ```
+  </Accordion>
+  <Accordion title="Unsubscribed">
+  Whenever a subscriber is unsubscribed this payload will be sent to the webhook:
+  ```json
+  {
+    "event":"subscriber.unsubscribed",
+    "data": {
+      "email":"stevejobs@gmail.com",
+      "firstName":"Steve",
+      "lastName":"Jobs",
+      "subscriberId":"f3a5e5afda82acd2569415e869193d9d",
+      "status":"UNSUBSCRIBED",
+      "countryCode":"US",
+      "unsubscribedAt":"2025-09-11T15:36:14.850Z"
+    }
+  }
+  ```
+  </Accordion>
+</AccordionGroup>
 
 ## Signature
 

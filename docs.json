@@ -34,17 +34,26 @@
             ]
           },
           {
-            "group": "Pricing",
+            "group": "Verify",
             "pages": [
-              "v1/pricing/getPrice"
+              "v1/verify/pricing",
+              "v1/verify/euro"
             ]
           },
           {
             "group": "Subscribers",
             "pages": [
-              "v1/subscribers/getSubscribers",
-              "v1/subscribers/updateEmail",
+              "v1/subscribers/all",
+              "v1/subscribers/update/email",
               "v1/subscribers/unsubscribe"
+            ]
+          },
+          {
+            "group": "Plans",
+            "pages": [
+              "v1/plans/all",
+              "v1/plans/create",
+              "v1/plans/archive"
             ]
           }
         ]

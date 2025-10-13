@@ -1,0 +1,105 @@
+---
+title: 'Archive plan'
+openapi: 'POST /plans/archive'
+---
+
+Use this endpoint to programmatically archive pricing plans for your project. Archiving a plan will prevent new subscriptions but existing subscribers will continue to be charged. This allows you to retire plans without affecting current customers.
+
+```method: POST
+https://api.taag.cc/v1/plans/archive
+```
+
+## Authorization
+
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
+
+```bash
+Authorization: taag_sk_mode_xxxxxxxxx
+```
+
+<ParamField path="Authorization" type="string" required>
+  Use the secret key that matches the mode you want (TEST or LIVE). Keys with `_test_` archive TEST plans, keys with `_live_` archive LIVE plans.
+</ParamField>
+
+## Request Body
+
+<ParamField body="planId" type="string" required>
+  The unique identifier of the plan you want to archive (e.g., "5482769083851118")
+</ParamField>
+
+## Response
+
+In the response to your request you will get a JSON object with the archived plan details.
+
+<AccordionGroup>
+  <Accordion title="Success Response">
+    When a plan is successfully archived, this will be your response:
+    
+    ```bash
+    {
+        "success": true,
+        "data": {
+            "planId": "5482769083851118",
+            "name": "Premium Monthly",
+            "archived": true,
+            "archivedAt": "2024-10-12T10:30:00.000Z"
+        }
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Missing Request Body">
+    When request body is missing, this will be your response:
+    
+    ```bash
+    {
+        "success": false,
+        "error": "Missing request body",
+        "description": "Request body is required with planId"
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Missing Plan ID">
+    When planId is missing from the request body, this will be your response:
+    
+    ```bash
+    {
+        "success": false,
+        "error": "Missing plan ID",
+        "description": "planId is required in the request body"
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Plan Not Found">
+    When the plan is not found, this will be your response:
+    
+    ```bash
+    {
+        "success": false,
+        "error": "Plan not found",
+        "description": "No plan found with ID \"5482769083851118\" for the current project and mode (TEST)"
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Already Archived">
+    When the plan has already been archived, this will be your response:
+    
+    ```bash
+    {
+        "success": false,
+        "error": "Plan already archived",
+        "description": "This plan has already been archived"
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+- Archiving a plan **does not cancel existing subscriptions**, current subscribers will continue to be charged.
+- Once a plan is archived, it cannot be unarchived through the API (contact support if needed).
+- The plan must belong to your project and match the mode of your secret key (TEST or LIVE).
+- Archived plans cannot be used for new checkouts or subscriptions.
+</Note>

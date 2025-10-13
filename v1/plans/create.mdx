@@ -1,0 +1,162 @@
+---
+title: 'Create plan'
+openapi: 'POST /plans/create'
+---
+
+Use this endpoint to programmatically create pricing plans for your project. This allows you to create plans directly from your backend without using the Taag's dashboard.
+
+```method: POST
+https://api.taag.cc/v1/plans/create
+```
+
+## Authorization
+
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
+
+```bash
+Authorization: taag_sk_mode_xxxxxxxxx
+```
+
+<ParamField path="Authorization" type="string" required>
+  Use the secret key that matches the mode you want (TEST or LIVE). Keys with `_test_` create TEST plans, keys with `_live_` create LIVE plans.
+</ParamField>
+
+## Request Body
+
+<ParamField body="name" type="string" required>
+  The name of your plan (e.g., "Basic", "Premium")
+</ParamField>
+
+<ParamField body="interval" type="string" required>
+  Billing interval. Must be one of: `MONTHLY`, `YEARLY`, or `LIFETIME`
+</ParamField>
+
+<ParamField body="amount" type="number" required>
+  Price amount. For currencies with cents (USD, EUR, GBP, CAD, ZAR), use the major unit (e.g., `10` = $10.00, `10.50` = $10.50). For currencies without cents (RWF, KES, UGX, TZS, NGN), use whole units (e.g., `5000` = 5000 RWF)
+</ParamField>
+
+<ParamField body="currency" type="string" default="USD">
+  Currency code. Supported: `USD`, `RWF`, `KES`, `UGX`, `TZS`, `NGN`, `ZAR`, `EUR`, `CAD`, `GBP`. If you specify a non-USD currency, local pricing will be automatically enabled.
+</ParamField>
+
+<ParamField body="countryCode" type="string">
+  **Required only for EUR currency**. A 2-letter country code for SEPA-supported countries. This is ignored for other currencies.
+  
+  <Accordion title="Supported EUR/SEPA Countries">
+    To verify if the country supports EUR currency, you can hit this API endpoint [verify euro](/v1/verify/euro).
+
+    **EU/EEA SEPA Countries:** `AT` (Austria), `BE` (Belgium), `BG` (Bulgaria), `HR` (Croatia), `CY` (Cyprus), `CZ` (Czech Republic), `DK` (Denmark), `EE` (Estonia), `FI` (Finland), `FR` (France), `DE` (Germany), `GR` (Greece), `HU` (Hungary), `IS` (Iceland), `IE` (Ireland), `IT` (Italy), `LV` (Latvia), `LI` (Liechtenstein), `LT` (Lithuania), `LU` (Luxembourg), `MT` (Malta), `NL` (Netherlands), `NO` (Norway), `PL` (Poland), `PT` (Portugal), `RO` (Romania), `SK` (Slovakia), `SI` (Slovenia), `ES` (Spain), `SE` (Sweden)
+    
+    **Non-EEA SEPA Countries:** `AD` (Andorra), `MC` (Monaco), `SM` (San Marino), `CH` (Switzerland), `VA` (Vatican City), `ME` (Montenegro), `AL` (Albania)
+    
+    **Non-EEA Territories:** `PM` (Saint-Pierre-et-Miquelon), `GG` (Guernsey), `JE` (Jersey), `IM` (Isle of Man)
+  </Accordion>
+</ParamField>
+
+## Response
+
+In the response to your request you will get a JSON object with the created plan details.
+
+<AccordionGroup>
+  <Accordion title="Success Response (USD)">
+    When a USD plan is successfully created, this will be your response:
+    
+    ```bash
+    {
+        "success": true,
+        "data": {
+            "planId": "5482769083851118",
+            "name": "Premium Monthly",
+            "interval": "MONTHLY",
+            "mode": "TEST",
+            "currency": "USD",
+            "amount": 1999,
+            "createdAt": "2024-10-12T10:30:00.000Z"
+        }
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Success Response (Local Currency)">
+    When a local currency plan is successfully created, this will be your response:
+    
+    ```bash
+    {
+        "success": true,
+        "data": {
+            "planId": "5482769083851118",
+            "name": "Premium Monthly",
+            "interval": "MONTHLY",
+            "mode": "TEST",
+            "currency": "RWF",
+            "amount": 1500000,
+            "countryCode": "RW",
+            "usdEquivalent": 1350,
+            "createdAt": "2024-10-12T10:30:00.000Z"
+        }
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Success Response (EUR)">
+    When a EUR plan is successfully created, this will be your response:
+    
+    ```bash
+    {
+        "success": true,
+        "data": {
+            "planId": "5482769083851118",
+            "name": "Premium Monthly",
+            "interval": "MONTHLY",
+            "mode": "TEST",
+            "currency": "EUR",
+            "amount": 1499,
+            "countryCode": "DE",
+            "usdEquivalent": 1620,
+            "createdAt": "2024-10-12T10:30:00.000Z"
+        }
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Missing Required Fields">
+    When required fields are missing, this will be your response:
+    
+    ```bash
+    {
+        "success": false,
+        "error": "Missing required fields",
+        "description": "name, interval, and amount are required"
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Missing Country Code (EUR)">
+    When countryCode is missing for EUR currency, this will be your response:
+    
+    ```bash
+    {
+        "success": false,
+        "error": "Missing country code",
+        "description": "countryCode is required when using EUR currency. Please provide a 2-letter SEPA country code (e.g., \"FR\", \"DE\", \"IT\", \"ES\", \"NL\", \"BE\", etc.)"
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Invalid Country Code (EUR)">
+    When an invalid countryCode is provided for EUR currency, this will be your response:
+    
+    ```bash
+    {
+        "success": false,
+        "error": "Invalid country code",
+        "description": "Country code \"XX\" is not a valid SEPA/Euro country. Please check our documentation for the full list of supported countries."
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+- When using non-USD currencies for the first time, the currency will be automatically enabled for the specified country.
+- **For EUR currency**: You must provide a `countryCode` parameter with a valid SEPA country code (44 countries supported).
+</Note>

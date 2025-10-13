@@ -41,19 +41,19 @@
             ]
           },
           {
-            "group": "Subscribers",
-            "pages": [
-              "v1/subscribers/all",
-              "v1/subscribers/update/email",
-              "v1/subscribers/unsubscribe"
-            ]
-          },
-          {
             "group": "Plans",
             "pages": [
               "v1/plans/all",
               "v1/plans/create",
               "v1/plans/archive"
+            ]
+          },
+          {
+            "group": "Subscribers",
+            "pages": [
+              "v1/subscribers/all",
+              "v1/subscribers/update/email",
+              "v1/subscribers/unsubscribe"
             ]
           }
         ]

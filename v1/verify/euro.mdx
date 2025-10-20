@@ -1,14 +1,22 @@
 ---
 title: 'Verify euro'
-openapi: 'GET /verify/euro'
+openapi: 'POST /verify/euro'
 ---
 
-You will use this API to check if a specific country code is supported for **EUR currency** payments. This is a public endpoint that does not require authentication.
+You will use this API to check if a specific country code is supported for **EUR currency** payments.
 
 Here is the API endpoint:
 
 ```method: POST
 https://api.taag.cc/v1/verify/euro
+```
+
+## Authorization
+
+All you need is to include your **public key** as a value of **authorization** in the header and hit the endpoint above.
+
+```bash
+Authorization: taag_pk_mode_xxxxxxxxx
 ```
 
 ## Request body

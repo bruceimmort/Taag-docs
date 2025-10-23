@@ -36,16 +36,7 @@
           {
             "group": "Verify",
             "pages": [
-              "v1/verify/pricing",
-              "v1/verify/euro"
-            ]
-          },
-          {
-            "group": "Plans",
-            "pages": [
-              "v1/plans/all",
-              "v1/plans/create",
-              "v1/plans/archive"
+              "v1/verify/pricing"
             ]
           },
           {

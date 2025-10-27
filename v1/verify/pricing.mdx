@@ -5,6 +5,8 @@ openapi: 'GET /verify/pricing'
 
 You will use this API to verify the prices to use based on a person's location. For example: Basic, Premium...
 
+<Danger>Always call this endpoint from the client side so we can determine the user's actual location. If you call it from the server side, the API will return pricing for the server's location instead of the user's actual location.</Danger>
+
 Here is the endpoint you will have to hit:
 
 ```method: GET

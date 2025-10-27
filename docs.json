@@ -28,8 +28,8 @@
               "introduction",
               "authorization",
               "checkout",
-              "testCards",
-              "redirectUrl",
+              "testcards",
+              "redirecturl",
               "webhook"
             ]
           },

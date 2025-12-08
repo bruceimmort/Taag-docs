@@ -1,0 +1,94 @@
+---
+title: 'Check subscribers'
+openapi: 'POST /subscribers/check'
+---
+
+Use this endpoint to check if a subscriber exists and retrieve their information using either their email or subscriber ID.
+
+```method: POST
+https://api.taag.cc/v1/subscribers/check
+```
+
+## Authorization
+
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
+
+```bash
+Authorization: taag_sk_mode_xxxxxxxxx
+```
+
+<ParamField path="Authorization" type="string" required> Use the secret key that matches the mode you are in TEST or LIVE </ParamField> 
+
+## Request Body
+
+You must provide either an email or subscriberId to look up the subscriber.
+
+```bash
+{
+  "email": "stevejobs@apple.com"
+}
+```
+
+**OR**
+
+```bash
+{
+  "subscriberId": "f3a5e5afda82acd2569415e869193d9d"
+}
+```
+
+ <ParamField body="email" type="string"> The email address of the subscriber you want to check </ParamField> <ParamField body="subscriberId" type="string"> The unique subscriber ID of the subscriber you want to check </ParamField> 
+
+<Note>At least one of **email** or **subscriberId** must be provided in the request body.</Note>
+
+## Response
+
+If the subscriber is found, you will receive an object containing the subscriber's details.
+
+```bash
+{
+  "mode": "TEST",
+  "subscriber": {
+    "email": "stevejobs@apple.com",
+    "firstName": "Steve",
+    "lastName": "Jobs",
+    "subscriberId": "f3a5e5afda82acd2569415e869193d9d",
+    "status": "SUBSCRIBED",
+    "countryCode": "US",
+    "createdAt": "2025-08-26T18:45:40.567Z"
+  }
+}
+```
+
+## Error Responses
+
+<AccordionGroup>
+  <Accordion title="400 Bad Request">
+    Returned when neither email nor subscriberId is provided.
+
+    ```bash
+    {
+        "error": "Either email or subscriberId must be provided"
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="404 Not Found">
+    Returned when the subscriber is not found.
+
+    ```bash
+    {
+        "error": "Subscriber not found"
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="500 Internal Error">
+    Returned when an unexpected error occurs.
+    ```bash
+    {
+        "error": "Internal Server Error"
+    }
+    ```
+  </Accordion>
+</AccordionGroup>

@@ -43,6 +43,7 @@
             "group": "Subscribers",
             "pages": [
               "v1/subscribers/all",
+              "v1/subscribers/check",
               "v1/subscribers/update/email",
               "v1/subscribers/unsubscribe"
             ]

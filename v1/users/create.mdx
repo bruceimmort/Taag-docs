@@ -1,0 +1,127 @@
+---
+title: 'Create user'
+openapi: 'POST /users/create'
+---
+
+Use this endpoint to create a new user within your project. Users are scoped to both the project and workspace mode (TEST or LIVE).
+
+```method: POST
+https://api.taag.cc/v1/users/create
+```
+
+## Authorization
+
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
+
+```bash
+Authorization: taag_sk_mode_xxxxxxxxx
+```
+
+ <ParamField path="Authorization" type="string" required> Use the secret key that matches the mode you are in TEST or LIVE </ParamField> 
+
+## Request Body
+
+Provide the user's email address and optionally include their name and country code.
+
+```bash
+{
+  "email": "user@example.com",
+  "name": "John Doe",
+  "countryCode": "US"
+}
+```
+
+ <ParamField body="email" type="string" required> The email address of the user. Must be a valid email format. </ParamField> <ParamField body="name" type="string"> The name of the user (optional) </ParamField> <ParamField body="countryCode" type="string"> A 2-letter ISO country code (e.g., "US", "GB", "FR"). Must be uppercase or will be converted to uppercase. </ParamField> <Note> Users are unique per project and mode combination. The same email can exist in both TEST and LIVE modes. </Note> 
+
+## Response
+
+If the user is created successfully, you will receive an object containing the user's details.
+
+```bash
+{
+  "success": true,
+  "data": {
+    "email": "user@example.com",
+    "name": "John Doe",
+    "countryCode": "US",
+    "mode": "TEST",
+    "createdAt": "2025-12-12T10:30:00.000Z"
+  }
+}
+```
+
+## Error Responses
+
+<AccordionGroup>
+  <Accordion title="400 Bad Request - Missing Body">
+    Returned when the request body is missing or empty.
+    ```bash
+    {
+      "success": false,
+      "error": "Missing request body",
+      "description": "Request body is required with email" 
+    }
+    ```
+  </Accordion>
+  <Accordion title="400 Bad Request - Missing Email">
+    Returned when the email field is not provided. 
+    ```bash
+    {
+      "success": false, 
+      "error": "Missing required fields", 
+      "description": "email is required"
+    }
+    ```
+  </Accordion>
+  <Accordion title="400 Bad Request - Invalid Email">
+    Returned when the email format is invalid.
+    ```bash
+    {
+      "success": false, 
+      "error": "Invalid email", 
+      "description": "Please provide a valid email address"
+    }
+    ```
+  </Accordion>
+  <Accordion title="400 Bad Request - Invalid Country Code">
+    Returned when the country code is not a valid 2-letter code. 
+    ```bash
+    {
+      "success": false, 
+      "error": "Invalid country code", 
+      "description": "countryCode must be a 2-letter country code (e.g., \"US\", \"GB\", \"FR\")"
+    }
+    ```
+  </Accordion>
+  <Accordion title="400 Bad Request - Invalid JSON">
+    Returned when the request body contains malformed JSON.
+    ```bash
+    {
+      "success": false, 
+      "error": "Invalid JSON", 
+      "description": "The request body contains invalid JSON. Please check for syntax errors like trailing commas or missing quotes."
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="409 Conflict">
+    Returned when a user with the same email already exists in this project and mode.
+    ```bash
+    {
+      "success": false, 
+      "error": "User already exists", 
+      "description": "A user with email user@example.com already exists in this project for TEST mode"
+    }
+    ```
+  </Accordion>
+  <Accordion title="500 Internal Server Error">
+    Returned when an unexpected error occurs.
+    ```bash
+    {
+      "success": false, 
+      "error": "Internal Server Error", 
+      "description": "An unexpected error occurred while creating the project user. Please try again or contact support if the issue persists."
+    }
+    ```
+  </Accordion>
+</AccordionGroup>

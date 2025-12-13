@@ -25,13 +25,13 @@ Authorization: taag_sk_mode_xxxxxxxxx
 
 ```bash
 {
-	"subscriberId": "f3a5e5afda82acd2569415e869193d9d",
-	"newEmail": "singlemoms@gmail.com"
+	"oldEmail": "user1@example.com",
+    "newEmail": "singlemoms@gmail.com"
 }
 ```
 
-<ResponseField name="subscriberId" type="string" required>
-    Use the subscriberId you received from us on [get subscribers](./getSubscribers) endpoint or the subscriber you received from our webhook on the subscriber creation
+<ResponseField name="oldEmail" type="string" required>
+    Use the old subscriber email that has to be updated
 </ResponseField>
 <ResponseField name="newEmail" type="email" required>
     The new email of the subscriber 

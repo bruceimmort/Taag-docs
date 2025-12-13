@@ -1,0 +1,216 @@
+---
+title: 'Create multiple users'
+openapi: 'POST /users/create/batch'
+---
+
+Use this endpoint to create multiple users within your project in a single request. Users are scoped to both the project and workspace mode (TEST or LIVE).
+
+```method: POST
+https://api.taag.cc/v1/users/create/batch
+```
+
+## Authorization
+
+All you need is to include your **secret key** as a value of **authorization** in the header and hit the endpoint above.
+
+```bash
+Authorization: taag_sk_mode_xxxxxxxxx
+```
+
+<ParamField path="Authorization" type="string" required> Use the secret key that matches the mode you are in TEST or LIVE </ParamField> 
+
+## Request Body
+
+Provide an array of users to create. Each user object should contain an email and optionally a name and country code.
+
+```bash
+{
+  "users": [
+    {
+      "email": "user1@example.com",
+      "name": "John Doe",
+      "countryCode": "US"
+    },
+    {
+      "email": "user2@example.com",
+      "name": "Jane Smith",
+      "countryCode": "GB"
+    },
+    {
+      "email": "user3@example.com",
+      "countryCode": "FR"
+    }
+  ]
+}
+```
+
+<ParamField body="users" type="array" required> 
+    An array of user objects to create. Minimum 1 user, maximum 1000 users per request. 
+</ParamField> 
+<ParamField body="users[].email" type="string" required> 
+    The email address of the user. Must be a valid email format. 
+</ParamField> 
+<ParamField body="users[].name" type="string"> 
+    The name of the user (optional) 
+</ParamField> 
+<ParamField body="users[].countryCode" type="string"> 
+    A 2-letter ISO country code (e.g., "US", "GB", "FR"). Must be uppercase or will be converted to uppercase. 
+</ParamField> 
+<Note> 
+    - Users are unique per project and mode combination. The same email can exist in both TEST and LIVE modes. 
+    - Duplicate emails within the same request will be rejected. 
+    - If some users already exist or are invalid, the operation will continue and create the valid, non-duplicate users. 
+</Note> 
+
+## Response
+
+The response includes a summary of the batch operation and details about any issues encountered.
+
+### Successful
+
+```bash
+{
+  "success": true,
+  "message": "Successfully created all 3 users",
+  "summary": {
+    "totalRequested": 3,
+    "totalCreated": 3,
+    "totalAlreadyExisted": 0,
+    "totalInvalid": 0,
+    "totalProcessed": 3
+  }
+}
+```
+
+### Partial Success Response (Some Issues)
+
+When some users already exist or have validation errors, you'll receive a 207 Multi-Status response:
+
+```bash
+{
+  "success": true,
+  "message": "Batch operation completed: 2 created, 1 already existed, 0 invalid",
+  "summary": {
+    "totalRequested": 3,
+    "totalCreated": 2,
+    "totalAlreadyExisted": 1,
+    "totalInvalid": 0,
+    "totalProcessed": 3
+  },
+  "issues": [
+    {
+      "email": "user1@example.com",
+      "status": "already_exists",
+      "error": "User with this email already exists in this project",
+      "data": {
+        "userId": "ext_abc123",
+        "email": "user1@example.com",
+        "name": "John Doe",
+        "countryCode": "US",
+        "mode": "TEST",
+        "createdAt": "2025-12-10T08:30:00.000Z"
+      }
+    }
+  ]
+}
+```
+
+## Error Responses
+
+<AccordionGroup> 
+    <Accordion title="400 Bad Request - Missing Body"> 
+        Returned when the request body is missing or empty. 
+        ```bash 
+        {
+            "success": false, 
+            "error": "Missing request body", 
+            "description": "Request body is required with users array" 
+        }
+        ```
+    </Accordion> 
+    <Accordion title="400 Bad Request - Invalid Format"> 
+        Returned when the users array is missing or not an array. 
+        ```bash 
+        {
+            "success": false, 
+            "error": "Invalid request format", 
+            "description": "Request body must contain a 'users' array" 
+        }
+        ``` 
+    </Accordion> 
+    <Accordion title="400 Bad Request - Empty Array"> 
+        Returned when the users array is empty. 
+        ```bash 
+        {
+            "success": false, 
+            "error": "Empty users array", 
+            "description": "The users array must contain at least one user" 
+        }
+        ``` 
+    </Accordion> 
+    <Accordion title="400 Bad Request - Too Many Users"> 
+        Returned when the request contains more than 1000 users. 
+        ```bash 
+        {
+            "success": false, 
+            "error": "Too many users", 
+            "description": "Maximum 1000 users can be created in a single batch request" 
+        }
+        ``` 
+    </Accordion> 
+    <Accordion title="400 Bad Request - Invalid JSON"> 
+        Returned when the request body contains malformed JSON. 
+        ```bash 
+        {
+            "success": false, 
+            "error": "Invalid JSON", 
+            "description": "The request body contains invalid JSON. Please check for syntax errors like trailing commas or missing quotes." 
+        }
+        ``` 
+    </Accordion> 
+    <Accordion title="207 Multi-Status - Validation Issues"> 
+        Returned when some users have validation errors. The response includes which users failed and why. 
+        ```bash 
+        {
+            "success": true, 
+            "message": "Batch operation completed: 1 created, 0 already existed, 2 invalid", 
+            "summary": { 
+                "totalRequested": 3, 
+                "totalCreated": 1, 
+                "totalAlreadyExisted": 0, 
+                "totalInvalid": 2, 
+                "totalProcessed": 3 
+            }, 
+            "issues": [ 
+                { 
+                    "email": "invalid-email", 
+                    "status": "invalid", 
+                    "error": "Invalid email format" 
+                }, 
+                { 
+                    "email": "user@example.com", 
+                    "status": "invalid", 
+                    "error": "Country code must be a 2-letter code (e.g., "US", "GB", "FR")" 
+                } 
+            ] 
+        }
+        ``` 
+    </Accordion> 
+    <Accordion title="500 Internal Server Error"> 
+        Returned when an unexpected error occurs. 
+        ```bash 
+        {
+            "success": false, 
+            "error": "Internal Server Error", 
+            "description": "An unexpected error occurred while creating project users. Please try again or contact support if the issue persists." 
+        }
+        ``` 
+    </Accordion> 
+</AccordionGroup> 
+
+## Issue Status Types
+
+When issues are reported in the response, they will have one of the following statuses:
+
+* `already_exists`: A user with this email already exists in the project for the current mode. The existing user's data is included in the response.
+* `invalid`: The user data failed validation (e.g., invalid email format, invalid country code, duplicate in request, missing email).

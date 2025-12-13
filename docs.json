@@ -40,6 +40,14 @@
             ]
           },
           {
+            "group": "Users",
+            "pages": [
+              "v1/users/create",
+              "v1/users/create/batch",
+              "v1/users/update/email"
+            ]
+          },
+          {
             "group": "Subscribers",
             "pages": [
               "v1/subscribers/all",
